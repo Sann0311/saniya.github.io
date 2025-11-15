@@ -46,6 +46,39 @@
       };
     })();
   </script>
+  <script>
+    (function(){
+      const aboutHTML = `
+        <p class="text-lg text-portfolio-light/90 leading-relaxed max-w-4xl mx-auto">
+          I’m a security professional who enjoys working where risk, technology, and AI innovation meet. My background includes ISO/NIST compliance work in the financial sector, hands-on security testing, and building internal tools that automate compliance workflows.
+          <br/><br/>
+          Most recently, I’ve been working on securing GenAI and LLM-based systems, designing threat models, developing audit checklists, and building an LLM-driven compliance assessment tool for vendors. This work sits at the intersection of security engineering, automation, and responsible AI.
+          <br/><br/>
+          Across every role, my goal is the same: make security practical. I turn frameworks and regulations into clear controls, scripts, and processes that help teams reduce risk without slowing down innovation. I’m excited about opportunities where I can contribute to both the technical and governance sides of security.
+        </p>
+      `;
+
+      function replaceAbout(){
+        const sec = document.getElementById('about');
+        if(!sec) return false;
+        // prefer the paragraph container inside the about section
+        const target = sec.querySelector('.mt-12 .bg-portfolio-bg p') || sec.querySelector('.mt-12 p') || sec.querySelector('p');
+        if(target){
+          target.innerHTML = aboutHTML;
+          return true;
+        }
+        return false;
+      }
+
+      // Try immediately, then on DOMContentLoaded/load, and polling fallback
+      if(!replaceAbout()){
+        document.addEventListener('DOMContentLoaded', replaceAbout);
+        window.addEventListener('load', replaceAbout);
+        const timer = setInterval(()=>{ if(replaceAbout()){ clearInterval(timer);} }, 250);
+        setTimeout(()=>clearInterval(timer), 10000);
+      }
+    })();
+  </script>
   <script type="module" crossorigin src="./assets/index-BviTiGz0.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-Cad4QMz7.css">
 </head>
